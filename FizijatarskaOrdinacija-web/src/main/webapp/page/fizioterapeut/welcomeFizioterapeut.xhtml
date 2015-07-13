@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Fizioterapeut</title>
+
+	<h:outputStylesheet library="css" name="fizijatar.welcome.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>
+				<p:outputLabel value="#{welcomeFizioterapeutManagedBean.fizioterapeut.ime} 
+				#{welcomeFizioterapeutManagedBean.fizioterapeut.prezime}, dobro dosli!"></p:outputLabel>
+			</h1>
+		</div>
+
+
+		<h:form>
+			<p:panelGrid columns="3" styleClass="mainHeader">
+				<p:commandButton value="Prikaz obaveza"
+					action="#{welcomeFizioterapeutManagedBean.showObaveze}"></p:commandButton>
+					
+				<p:commandButton value="Administrator"
+					rendered="#{welcomeFizioterapeutManagedBean.fizioterapeut.radnik.admin}"
+					action="#{welcomeFizioterapeutManagedBean.adminPage}"></p:commandButton>
+					
+				<p:commandButton value="Odjavi se"
+					action="#{loginManagedBean.logOut}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+
+
+		<div id="main" align="center">
+			<div id="mainLeft">
+				<h:form id="info">
+					<p:growl id="message" showDetail="true" life="5000" />
+				
+					<p:outputLabel value="Osnovni podaci" style="font-size: 22px;"></p:outputLabel>
+					<p:panelGrid id="panelGrid" columns="2">
+						<p:outputLabel value="Korisnicko ime: "></p:outputLabel>
+						<p:inputText disabled="true"
+							value="#{welcomeFizioterapeutManagedBean.fizioterapeut.korisnickoIme}"></p:inputText>
+						<p:outputLabel value="email: "></p:outputLabel>
+						<p:inputText value="#{welcomeFizioterapeutManagedBean.fizioterapeut.email}"></p:inputText>
+						<p:outputLabel value="JMBG: "></p:outputLabel>
+						<p:inputText value="#{welcomeFizioterapeutManagedBean.fizioterapeut.jmbg}"></p:inputText>
+						<p:outputLabel value="Adresa stanovanja: "></p:outputLabel>
+						<p:inputText value="#{welcomeFizioterapeutManagedBean.fizioterapeut.adresa}"></p:inputText>
+						<p:outputLabel value="Mesto stanovanja: "></p:outputLabel>
+						<p:inputText value="#{welcomeFizioterapeutManagedBean.fizioterapeut.mesto}"></p:inputText>
+						<p:outputLabel value="Mesto rodjenja: "></p:outputLabel>
+						<p:inputText
+							value="#{welcomeFizioterapeutManagedBean.fizioterapeut.mestoRodjenja}"></p:inputText>
+						<p:outputLabel value="Datum rodjenja: "></p:outputLabel>
+						<p:calendar locale="sr" pattern="yyyy-MMM-dd"
+							value="#{welcomeFizioterapeutManagedBean.fizioterapeut.datumRodjenja}"></p:calendar>
+						<p:outputLabel value="Datum zaposlenja: "></p:outputLabel>
+						<p:calendar locale="sr" disabled="true" pattern="yyyy-MMM-dd"
+							value="#{welcomeFizioterapeutManagedBean.fizioterapeut.radnik.datumZaposlenja}"></p:calendar>
+						<p:outputLabel value="Specijalista: "></p:outputLabel>
+						<p:inputText
+							value="#{welcomeFizioterapeutManagedBean.fizioterapeut.radnik.fizioterapeut.spec}"></p:inputText>
+					</p:panelGrid>
+					<br />
+					<p:commandButton id="savePacijent" value="Sacuvaj" execute="message"
+						update="@form"
+						action="#{welcomeFizioterapeutManagedBean.updateFizioterapeut}"></p:commandButton>
+				</h:form>
+			</div>
+			<div id="mainRight">
+				<h:form>
+					<p:growl id="msgSearch" showDetail="true" life="5000" />
+					<p:panelGrid columns="1" styleClass="panelGridSearch">
+						<p:inputText required="true" styleClass="inputTextSearch"
+							placeholder="Unesite jmbg ili korisnicko ime pacijenta"
+							value="#{welcomeFizioterapeutManagedBean.pacijentString}"></p:inputText>
+							
+						<p:commandButton value="Prikazi pacijenta" execute="@form"
+							update="msgSearch"
+							action="#{welcomeFizioterapeutManagedBean.findPacijent}"></p:commandButton>
+					</p:panelGrid>
+				</h:form>
+			</div>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

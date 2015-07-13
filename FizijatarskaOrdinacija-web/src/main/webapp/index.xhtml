@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Fizikalna terapija</title>
+
+	<h:outputStylesheet library="css" name="index.css" />
+
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h:form id="loginForm">
+				<p:growl id="message" showDetail="true" life="5000" />
+				<br />
+				<p:inputText placeholder="Korisnicko ime"
+					value="#{loginManagedBean.username}" required="true"></p:inputText>
+				<p:password id="lozinka" placeholder="Sifra" value="#{loginManagedBean.pass}"
+					required="true"></p:password>
+					
+				<p:commandButton styleClass="loginButton" value="Prijavi se"
+					action="#{loginManagedBean.logIn}" update="message, lozinka">
+				</p:commandButton>
+			</h:form>
+		</div>
+
+
+		<div id="main">
+			<h:form id="regForm">
+				<p:growl id="messageReg" showDetail="true" life="5000" />
+				<p:outputLabel value="Registracija pacijenta"
+					style="font-size: 30px;" />
+				<br />
+				<p:inputText placeholder="Korisnicko ime"
+					value="#{registerPacijentManagedBean.username}" required="true"></p:inputText>
+				<br />
+				<p:password id="loz1" placeholder="Sifra"
+					value="#{registerPacijentManagedBean.pass1}" required="true"></p:password>
+				<br />
+				<p:password id="loz2" placeholder="Ponovo unesite sifru"
+					value="#{registerPacijentManagedBean.pass2}" required="true"></p:password>
+				<br />
+				<br />
+				<p:outputLabel value="Izaberite fizijatra:"></p:outputLabel>
+				<br />
+				 
+				<p:selectOneMenu value="#{registerPacijentManagedBean.fizijatar}">
+					<f:converter converterId="fizijatarConverter" />
+					<f:selectItems value="#{allFizijatariManagedBean.fizijatri}"
+						var="fiz"
+						itemLabel="#{fiz.getRadnik().getOsoba().getIme()} #{fiz.getRadnik().getOsoba().getPrezime()} - #{fiz.getSpec()}"
+						itemValue="#{fiz}" />
+				</p:selectOneMenu>
+				
+				<br />
+				<br />
+				<p:outputLabel value="Izaberite fizioterapeuta:"></p:outputLabel>
+				<br />
+				<p:selectOneMenu
+					value="#{registerPacijentManagedBean.fizioterapeut}">
+					<f:converter converterId="fizioterapeutConverter" />
+					<f:selectItems
+						value="#{allFizioterapeutManagedBean.fizioterapeuti}" var="fiz"
+						itemLabel="#{fiz.getRadnik().getOsoba().getIme()} #{fiz.getRadnik().getOsoba().getPrezime()} - #{fiz.getSpec()}"
+						itemValue="#{fiz}" />
+				</p:selectOneMenu>
+				
+				<br />
+				<p:commandButton styleClass="regButton" value="Registruj se"
+					action="#{registerPacijentManagedBean.register}"
+					update="messageReg, loz1, loz2">
+				</p:commandButton>
+			</h:form>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+</h:body>
+</html>

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Izabrane vezbe</title>
+
+	<h:outputStylesheet library="css"
+		name="fizioterapeut.show.current.vezbe.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>Prikaz vezbi</h1>
+		</div>
+
+		<div id="main">
+
+			<div id="boxLeft">
+				<div id="pacijentInfo">
+					<h2>Pacijent</h2>
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Ime i prezime:" />
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.pacijent.osoba.ime} 
+						#{showTodaysVezbeManagedBean.pacijent.osoba.prezime}" />
+
+						<p:outputLabel value="Broj zdravstvene knjizice:" />
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.pacijent.brojZdravstveneKnjizice}" />
+
+						<p:outputLabel value="JMBG:" />
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.pacijent.osoba.jmbg}" />
+
+						<p:outputLabel value="email:" />
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.pacijent.osoba.email}" />
+					</p:panelGrid>
+				</div>
+
+				<div id="pacijentVezbe">
+					<h:form>
+						<p:growl id="messageVezbe" showDetail="true" life="5000" />
+						
+						<h3>Vezbe</h3>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Program:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showTodaysVezbeManagedBean.vezbe.program}"></p:inputTextarea>
+						</p:panelGrid>
+
+						<h3>Stanje</h3>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Opis stanja:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showTodaysVezbeManagedBean.stanje.opisStanja}"></p:inputTextarea>
+						</p:panelGrid>
+
+						<p:commandButton value="Sacuvaj vezbe" update="messageVezbe"
+							execute="@form"
+							action="#{showTodaysVezbeManagedBean.updateVezbe}"></p:commandButton>
+					</h:form>
+				</div>
+			</div>
+
+			<div id="boxRight" align="center">
+				<div>
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Naziv:"></p:outputLabel>
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.vezbe.obaveza.naziv}"></p:outputLabel>
+
+						<p:outputLabel value="Opis:"></p:outputLabel>
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.vezbe.obaveza.opis}"></p:outputLabel>
+
+						<p:outputLabel value="Datum:"></p:outputLabel>
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.vezbe.obaveza.datum}"></p:outputLabel>
+
+						<p:outputLabel value="Vreme:"></p:outputLabel>
+						<p:outputLabel
+							value="#{showTodaysVezbeManagedBean.vezbe.obaveza.vremeOd} -
+							#{showTodaysVezbeManagedBean.vezbe.obaveza.vremeDo}"></p:outputLabel>
+					</p:panelGrid>
+				</div>
+
+				<h:form>
+					<p:growl id="messageNapomena" showDetail="true" life="5000" />
+					
+					<h3>Pregled</h3>
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Stanje:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px" disabled="true"
+							value="#{showTodaysVezbeManagedBean.pregled.stanje.opisStanja}"></p:inputTextarea>
+
+						<p:outputLabel value="Dijagnoza:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px" disabled="true"
+							value="#{showTodaysVezbeManagedBean.pregled.dijagnoza.opis}"></p:inputTextarea>
+
+						<p:outputLabel value="Terapija:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px" disabled="true"
+							value="#{showTodaysVezbeManagedBean.pregled.terapija.opis}"></p:inputTextarea>
+
+						<p:outputLabel value="Napomena:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px"
+							placeholder="Unesite napomenu..."
+							value="#{showTodaysVezbeManagedBean.pregled.napomena}"></p:inputTextarea>
+
+					</p:panelGrid>
+
+					<p:commandButton value="Sacuvaj napomenu" execute="@form"
+						update="messageNapomena"
+						action="#{showTodaysVezbeManagedBean.updateNapomena}"></p:commandButton>
+				</h:form>
+			</div>
+
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+</h:body>
+</html>

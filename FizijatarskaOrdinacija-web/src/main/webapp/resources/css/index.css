@@ -1,0 +1,44 @@
+body {
+	background: #bdffaf;
+}
+
+/* required polje when empty   */
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header
+	.ui-state-error {
+	border: 2px solid red;
+}
+
+#header {
+	
+}
+
+#main {
+	margin-top: 10%;
+	text-align: center;
+}
+
+#footer {
+	
+}
+
+.ui-inputfield {
+	text-align: center;
+}
+
+#header .ui-inputfield {
+	margin-left: 10px;
+}
+
+#main .ui-inputfield {
+	margin-top: 10px;
+}
+
+.loginButton {
+	margin-left: 10px;
+	font-size: 16px;
+}
+
+.regButton {
+	margin-top: 10px;
+	font-size: 16px;
+}

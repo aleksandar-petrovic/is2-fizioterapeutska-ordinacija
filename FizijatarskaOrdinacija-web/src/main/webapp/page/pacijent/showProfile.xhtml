@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Pacijent - Profil</title>
+
+	<h:outputStylesheet library="css" name="pacijent.show.profile.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header"></div>
+
+		<div id="main">
+			<div id="infoBox" align="center">
+				<h:form id="info">
+
+					<p:growl id="message" showDetail="true" life="5000" />
+
+					<p:outputLabel value="Osnovni podaci" style="font-size: 22px;"></p:outputLabel>
+					<p:panelGrid id="panelGrid" columns="2">
+						<p:outputLabel value="Ime: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.ime}"></p:inputText>
+						<p:outputLabel value="Prezime: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.prezime}"></p:inputText>
+						<p:outputLabel value="Korisnicko ime: "></p:outputLabel>
+						<p:inputText disabled="true"
+							value="#{welcomePacijentManagedBean.osoba.korisnickoIme}"></p:inputText>
+						<p:outputLabel value="email: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.email}"></p:inputText>
+						<p:outputLabel value="JMBG: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.jmbg}"></p:inputText>
+						<p:outputLabel value="Broj zdravstvene knjizice: "></p:outputLabel>
+						<p:inputText required="true"
+							value="#{welcomePacijentManagedBean.osoba.pacijent.brojZdravstveneKnjizice}"></p:inputText>
+						<p:outputLabel value="Adresa stanovanja: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.adresa}"></p:inputText>
+						<p:outputLabel value="Mesto stanovanja: "></p:outputLabel>
+						<p:inputText value="#{welcomePacijentManagedBean.osoba.mesto}"></p:inputText>
+						<p:outputLabel value="Mesto rodjenja: "></p:outputLabel>
+						<p:inputText
+							value="#{welcomePacijentManagedBean.osoba.mestoRodjenja}"></p:inputText>
+						<p:outputLabel value="Datum rodjenja: "></p:outputLabel>
+						<p:calendar locale="sr" pattern="yyyy-MMM-dd"
+							value="#{welcomePacijentManagedBean.osoba.datumRodjenja}"></p:calendar>
+
+						<p:outputLabel value="Izaberi fizijatra"></p:outputLabel>
+						<p:selectOneMenu value="#{welcomePacijentManagedBean.fizijatar}">
+							<f:converter converterId="fizijatarConverter" />
+							<f:selectItems value="#{allFizijatariManagedBean.fizijatri}"
+								var="fiz"
+								itemLabel="#{fiz.radnik.osoba.ime} #{fiz.radnik.osoba.prezime} - #{fiz.spec}"
+								itemValue="#{fiz}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Izaberi fizioterapeuta"></p:outputLabel>
+						<p:selectOneMenu
+							value="#{welcomePacijentManagedBean.fizioterapeut}">
+
+							<f:converter converterId="fizioterapeutConverter" />
+							<f:selectItems
+								value="#{allFizioterapeutManagedBean.fizioterapeuti}" var="fiz"
+								itemLabel="#{fiz.radnik.osoba.ime} #{fiz.radnik.osoba.prezime} - #{fiz.spec}"
+								itemValue="#{fiz}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<br />
+					<p:commandButton id="savePacijent" value="Sacuvaj" execute="@form"
+						update="message"
+						action="#{welcomePacijentManagedBean.updatePacijent}"></p:commandButton>
+				</h:form>
+			</div>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

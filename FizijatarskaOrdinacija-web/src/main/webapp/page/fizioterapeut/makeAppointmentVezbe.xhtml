@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Zakazivanje vezbi</title>
+
+	<h:outputStylesheet library="css"
+		name="fizijatar.pacijent.make.appointment.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>Zakazivanje vezbi za
+				#{scheduleViewFizioterapeutPacijent.pacijent.osoba.ime}
+				#{scheduleViewFizioterapeutPacijent.pacijent.osoba.prezime}</h1>
+		</div>
+
+		<div id="boxColor">
+			<p:outputLabel styleClass="labelBox" value="Privatna obaveza: " />
+			<div id="boxPrivate" />
+			<br />
+			<p:outputLabel styleClass="labelBox" value="Vezbe: " />
+			<div id="boxPublic" />
+			<br />
+			<p:outputLabel styleClass="labelBox" value="Obaveze pacijenta: " />
+			<div id="boxPublicPacijent" />
+		</div>
+
+		<div id="main">
+
+			<p:schedule id="schedule" styleClass="schedule"
+				value="#{scheduleViewFizioterapeutPacijent.eventModel}"
+				widgetVar="myschedule" timeZone="GMT+2" locale="sr"
+				resizable="false" draggable="false" axisFormat="H(:mm)"
+				timeFormat="H(:mm)" slotMinutes="15">
+
+				<p:ajax event="dateSelect"
+					listener="#{scheduleViewFizioterapeutPacijent.onDateSelect}"
+					update="newEventForm" oncomplete="PF('newEventDialog').show();" />
+
+				<p:ajax event="eventSelect"
+					listener="#{scheduleViewFizioterapeutPacijent.onEventSelect}"
+					update="editEventForm" oncomplete="PF('editEventDialog').show();" />
+			</p:schedule>
+
+
+			<p:dialog id="editEventDialog" widgetVar="editEventDialog"
+				header="Detalji obaveze" showEffect="clip" hideEffect="clip">
+				<h:form id="editEventForm">
+
+					<p:commandButton value="Obrisi" styleClass="deleteButton"
+						actionListener="#{scheduleViewFizioterapeutPacijent.deleteEvent}"
+						oncomplete="PF('myschedule').update();PF('editEventDialog').hide();" />
+
+					<br />
+
+					<p:outputLabel value="#{scheduleViewFizioterapeutPacijent.message}"></p:outputLabel>
+
+					<h:panelGrid id="editEventDetails" columns="2">
+						<p:outputLabel value="Naziv:" />
+						<p:inputText
+							value="#{scheduleViewFizioterapeutPacijent.choosedObaveza.naziv}"
+							required="true" />
+
+						<p:outputLabel value="Opis:" />
+						<p:inputTextarea
+							value="#{scheduleViewFizioterapeutPacijent.choosedObaveza.opis}" />
+
+						<p:outputLabel value="Datum:" />
+						<p:calendar locale="sr" required="true" pattern="yyyy-MMM-dd"
+							value="#{scheduleViewFizioterapeutPacijent.choosedObaveza.datum}"></p:calendar>
+
+						<p:outputLabel id="messageOd1" />
+						<p:outputLabel />
+						<p:outputLabel value="Vreme od:" />
+						<p:inputText placeholder="hh:mm" required="true"
+							value="#{scheduleViewFizioterapeutPacijent.choosedObaveza.vremeOd}">
+							<f:validator for="messageOd1" validatorId="timeValidator"></f:validator>
+						</p:inputText>
+
+						<p:outputLabel id="messageDo1" />
+						<p:outputLabel />
+						<p:outputLabel value="Vreme do:" />
+						<p:inputText placeholder="hh:mm" required="true"
+							value="#{scheduleViewFizioterapeutPacijent.choosedObaveza.vremeDo}">
+							<f:validator for="messageDo1" validatorId="timeValidator"></f:validator>
+						</p:inputText>
+
+						<br />
+						<p:commandButton value="Sacuvaj" styleClass="saveButton"
+							update="@form" process="@form"
+							actionListener="#{scheduleViewFizioterapeutPacijent.editEvent}" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<p:dialog id="newEventDialog" widgetVar="newEventDialog"
+				header="Novi termin vezbi" showEffect="clip" hideEffect="clip">
+				<h:form id="newEventForm">
+
+					<p:outputLabel value="#{scheduleViewFizioterapeutPacijent.message}"></p:outputLabel>
+
+					<h:panelGrid id="newEventDetails" columns="2">
+						<p:outputLabel value="Naziv: " />
+						<p:inputText required="true"
+							value="#{scheduleViewFizioterapeutPacijent.newObaveza.naziv}" />
+
+						<p:outputLabel value="Opis:" />
+						<p:inputTextarea
+							value="#{scheduleViewFizioterapeutPacijent.newObaveza.opis}" />
+
+						<p:outputLabel value="Datum:" />
+						<p:calendar locale="sr" required="true" pattern="yyyy-MMM-dd"
+							value="#{scheduleViewFizioterapeutPacijent.newObaveza.datum}"></p:calendar>
+
+						<p:outputLabel id="messageOd2" />
+						<p:outputLabel />
+						<p:outputLabel value="Vreme od:" />
+						<p:inputText required="true" placeholder="hh:mm"
+							value="#{scheduleViewFizioterapeutPacijent.newObaveza.vremeOd}">
+							<f:validator for="messageOd2" validatorId="timeValidator"></f:validator>
+						</p:inputText>
+
+						<p:outputLabel id="messageDo2" />
+						<p:outputLabel />
+						<p:outputLabel value="Vreme do:" />
+						<p:inputText required="true" placeholder="hh:mm"
+							value="#{scheduleViewFizioterapeutPacijent.newObaveza.vremeDo}">
+							<f:validator for="messageDo2" validatorId="timeValidator"></f:validator>
+						</p:inputText>
+
+						<br />
+						<p:commandButton value="Sacuvaj" styleClass="saveButton"
+							update="@form" process="@form"
+							actionListener="#{scheduleViewFizioterapeutPacijent.addEvent}" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		</div>
+
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

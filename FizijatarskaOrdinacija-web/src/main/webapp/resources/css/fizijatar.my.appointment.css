@@ -1,0 +1,89 @@
+body {
+	background: #bdffaf;
+}
+
+#header {
+	text-align: center;
+}
+
+#main {
+	margin-top: 2%;
+	text-align: center;
+	margin-left: 15%;
+}
+
+#footer {
+	
+}
+
+.datailsButton {
+	margin-right: 10px !important;
+	background-color: #7dffbe !important;
+}
+
+.deleteButton {
+	margin-left: 10px !important;
+	background-color: #ff8a8a !important;
+	margin-bottom: 10px !important;
+}
+
+.saveButton {
+	background-color: #7dffbe !important;
+}
+
+.schedule {
+	width: 80%;
+}
+
+.fc-event.eventPrivate {
+	background: #ff6262;
+}
+
+.fc-event.eventPublic {
+	background: #2d7bff;
+}
+
+#boxColor {
+	width: 80%;
+	margin-left: 15%;
+}
+
+#boxPrivate {
+	width: 40px;
+	height: 15px;
+	background: #ff6262;
+	float: right;
+	margin-right: 80%;
+}
+
+#boxPublic {
+	width: 40px;
+	height: 15px;
+	background: #2d7bff;
+	float: right;
+	margin-right: 80%;
+}
+
+#labelPrivate {
+	text-align: left !important;
+}
+
+#labelPublic {
+	text-align: left !important;
+}
+
+/* required polje when empty  */
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header
+	.ui-state-error {
+	border: 2px solid red;
+}
+
+/* p:inputText text center */
+.ui-inputfield.ui-inputtext {
+	text-align: center;
+}
+
+/* p:calendar text center */
+.ui-inputfield.ui-widget.ui-state-default.ui-corner-all.hasDatepicker {
+	text-align: center;
+}

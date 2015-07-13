@@ -1,0 +1,52 @@
+body {
+	background: #bdffaf;
+}
+
+#header {
+	text-align: center;
+}
+
+#main {
+	margin-top: 2%;
+	text-align: center;
+}
+
+#footer {
+	
+}
+
+#boxLeft {
+	width: 60%;
+	float: left;
+}
+
+#boxRight {
+	text-align: center;
+	float: right;
+	margin-top: 10%;
+	width: 40%;
+}
+
+/* required polje when empty  */
+.ui-state-error, .ui-widget-content  .ui-state-error, .ui-widget-header 
+	.ui-state-error {
+	border: 2px solid red;
+}
+
+/* p:inputText text center */
+.ui-inputfield.ui-inputtext {
+	text-align: center;
+}
+
+/* p:calendar text center */
+.ui-inputfield .ui-widget .ui-state-default .ui-corner-all .hasDatepicker
+	{
+	text-align: center;
+}
+
+/* table border and background color */
+table   tbody  .ui-widget-content {
+	background: none repeat scroll 0 0 #bdffaf;
+	border: 0 solid #bdffaf;
+	color: #333333;
+}

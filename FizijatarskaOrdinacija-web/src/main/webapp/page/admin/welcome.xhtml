@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Administrator</title>
+
+	<h:outputStylesheet library="css" name="admin.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>Administratore, dobro dosli</h1>
+		</div>
+
+		<div id="main">
+			<div id="boxLeft">
+
+				<h:form id="regFormAdmin">
+				
+					<p:growl id="message" showDetail="true" life="5000" />
+					
+					<p:outputLabel value="Registracija radnika"
+						style="font-size: 24px;"></p:outputLabel>
+					<br />
+					<br />
+					<p:inputText placeholder="Korisnicko ime"
+						value="#{registerAdminManagedBean.korisnicko}" required="true"></p:inputText>
+					<br />
+					<br />
+					<p:inputText placeholder="Ime"
+						value="#{registerAdminManagedBean.ime}" required="true"></p:inputText>
+					<br />
+					<br />
+					<p:inputText placeholder="Prezime"
+						value="#{registerAdminManagedBean.prezime}" required="true"></p:inputText>
+					<br />
+					<br />
+					<p:inputText placeholder="E-mail"
+						value="#{registerAdminManagedBean.email}" required="true"></p:inputText>
+					<br />
+					<br />
+					<p:password id="loz1" placeholder="Lozinka"
+						value="#{registerAdminManagedBean.lozinka}" required="true"></p:password>
+					<br />
+					<br />
+					<p:password id="loz2" placeholder="Ponovite lozinku"
+						value="#{registerAdminManagedBean.lozinkaPon}" required="true"></p:password>
+					<br />
+					<br />
+
+					<p:outputLabel value="Izaberite profesiju:"></p:outputLabel>
+					<br />
+					<p:selectOneMenu id="listProf"
+						value="#{registerAdminManagedBean.profesija}">
+						<f:selectItem itemLabel="Sestra" itemValue="sestra"></f:selectItem>
+						<f:selectItem itemLabel="Fizioterapeut" itemValue="fizioterapeut"></f:selectItem>
+						<f:selectItem itemLabel="Fizijatar" itemValue="fizijatar"></f:selectItem>
+					</p:selectOneMenu>
+					<br />
+					<br />
+
+					<p:inputText placeholder="Specijalnost"
+						value="#{registerAdminManagedBean.spec}"></p:inputText>
+					<br />
+					<br />
+					<p:outputLabel value="Administrator "></p:outputLabel>
+					<p:selectBooleanCheckbox value="#{registerAdminManagedBean.admin}" />
+					<br />
+					<br />
+
+					<p:commandButton styleClass="regButton" value="Registruj se"
+						action="#{registerAdminManagedBean.register}"
+						update="message, loz1, loz2">
+					</p:commandButton>
+				</h:form>
+			</div>
+			<div id="boxRight">
+
+				<h:form>
+					<p:panelGrid columns="1">
+						<p:outputLabel value="Izvestaji:"></p:outputLabel>
+						<p:commandButton value="Sve osobe"
+							action="/page/reports/allOsobeGroupByBirthDate.xhtml"
+							ajax="false"></p:commandButton>
+						<p:commandButton value="Svi fizijatri"
+							action="/page/reports/allFizijatri.xhtml" ajax="false"></p:commandButton>
+						<p:commandButton value="Svi pacijenti"
+							action="/page/reports/allPacijentiByFizijatar.xhtml" ajax="false"></p:commandButton>
+					</p:panelGrid>
+
+				</h:form>
+
+			</div>
+
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+</h:body>
+</html>

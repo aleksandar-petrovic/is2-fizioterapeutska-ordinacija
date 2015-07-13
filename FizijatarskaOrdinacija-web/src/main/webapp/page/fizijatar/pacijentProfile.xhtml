@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Pacijent - Karton</title>
+
+	<h:outputStylesheet library="css" name="fizijatar.pacijent.profile.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<H1>Prikaz pacijenta</H1>
+		</div>
+
+		<div id="main">
+			<div id="mainLeft">
+				<h2>Osnovne informacije</h2>
+				<p:panelGrid columns="2" columnClasses="">
+					<p:outputLabel value="Ime: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.ime}"></p:outputLabel>
+					<p:outputLabel value="Prezime: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.prezime}"></p:outputLabel>
+					<p:outputLabel value="Korisnicko ime: "></p:outputLabel>
+					<p:outputLabel disabled="true"
+						value="#{editPacijentManagedBean.pacijent.osoba.korisnickoIme}"></p:outputLabel>
+					<p:outputLabel value="email: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.email}"></p:outputLabel>
+					<p:outputLabel value="JMBG: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.jmbg}"></p:outputLabel>
+					<p:outputLabel value="Broj zdravstvene knjizice: "></p:outputLabel>
+					<p:outputLabel required="true"
+						value="#{editPacijentManagedBean.pacijent.osoba.pacijent.brojZdravstveneKnjizice}"></p:outputLabel>
+					<p:outputLabel value="Adresa stanovanja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.adresa}"></p:outputLabel>
+					<p:outputLabel value="Mesto stanovanja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.mesto}"></p:outputLabel>
+					<p:outputLabel value="Mesto rodjenja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.mestoRodjenja}"></p:outputLabel>
+					<p:outputLabel value="Datum rodjenja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.osoba.datumRodjenja}"></p:outputLabel>
+					<p:outputLabel value="Fizioterapeut: "></p:outputLabel>
+					<p:outputLabel
+						value="#{editPacijentManagedBean.pacijent.fizioterapeut.radnik.osoba.ime} 
+						#{editPacijentManagedBean.pacijent.fizioterapeut.radnik.osoba.prezime}"></p:outputLabel>
+				</p:panelGrid>
+			</div>
+			<div id="mainRight" align="center">
+				<h2>Karton</h2>
+				<h:form>
+					<p:growl id="message" showDetail="true" life="5000" />
+							
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Alergije:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px"
+							value="#{editPacijentManagedBean.pacijent.karton.alergija}"></p:inputTextarea>
+						<p:outputLabel value="Bolesti:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px"
+							value="#{editPacijentManagedBean.pacijent.karton.bolesti}"></p:inputTextarea>
+						<p:outputLabel value="Sistematski:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px"
+							value="#{editPacijentManagedBean.pacijent.karton.sistematski}"></p:inputTextarea>
+						<p:outputLabel value="Napomena:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px"
+							value="#{editPacijentManagedBean.pacijent.karton.napomena}"></p:inputTextarea>
+
+						<p:outputLabel></p:outputLabel>
+						<p:commandButton value="Sacuvaj" execute="@form" update="message"
+							action="#{editPacijentManagedBean.updatePacijentKarton}"></p:commandButton>
+					</p:panelGrid>
+
+				</h:form>
+			</div>
+			<div id="mainDown" align="center">
+				<div id="mainDownLeft" align="center">
+					<p:outputLabel value="Dnevna stanja"></p:outputLabel>
+					<BR /> <BR />
+					<c:choose>
+						<c:when
+							test="#{!empty editPacijentManagedBean.pacijent.karton.dnevnostanjes}">
+							<p:carousel numVisible="1" itemStyle="height:200px; width:500px;"
+								effect="easeInStrong" headerText="Stanje"
+								style="margin-bottom:0"
+								value="#{editPacijentManagedBean.allDnevnaStanja}" var="stanje">
+								<p:panelGrid columns="2" style="width: 100%;height: 100%;">
+									<p:outputLabel value="Datum: "></p:outputLabel>
+									<p:outputLabel value="#{stanje.datum}"></p:outputLabel>
+									<p:outputLabel value="Disanje: "></p:outputLabel>
+									<p:outputLabel value="#{stanje.disanje}"></p:outputLabel>
+									<p:outputLabel value="Pritisak: "></p:outputLabel>
+									<p:outputLabel value="#{stanje.pritisak}"></p:outputLabel>
+									<p:outputLabel value="Temperatura: "></p:outputLabel>
+									<p:outputLabel value="#{stanje.temperatura}"></p:outputLabel>
+								</p:panelGrid>
+							</p:carousel>
+						</c:when>
+						<c:otherwise>
+							<p:outputLabel
+								value="U bazi ne postoje dnevna stanja za pacijenta"></p:outputLabel>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div id="mainDownRight">
+					<p:outputLabel value="Pregledi"></p:outputLabel>
+					<BR /> <BR />
+					<h:form>
+						<p:commandButton styleClass="makeAppointmentButton"
+							value="Zakazi pregled"
+							action="#{editPacijentManagedBean.makeAppointment}"
+							execute="@form" update="@form"></p:commandButton>
+							
+						<p:commandButton styleClass="appointmentButton"
+							value="Zakazan pregled"
+							action="#{editPacijentManagedBean.scheduledPregled}"
+							execute="@form" update="@form"></p:commandButton>
+					</h:form>
+					<BR /> <BR />
+					<c:choose>
+						<c:when
+							test="#{!empty editPacijentManagedBean.pacijent.karton.pregleds}">
+							<p:carousel numVisible="1" itemStyle="height:200px; width:500px;"
+								effect="easeInStrong" headerText="Pregled"
+								value="#{editPacijentManagedBean.allPregledi}" var="pregled"
+								itemStyleClass="text-align: center; ">
+								<p:panelGrid columns="2" style="width: 100%;height: 100%;">
+									<p:outputLabel value="Naziv: "></p:outputLabel>
+									<p:outputLabel value="#{pregled.obaveza.naziv}"></p:outputLabel>
+
+									<p:outputLabel value="Opis: "></p:outputLabel>
+									<p:outputLabel value="#{pregled.obaveza.opis}"></p:outputLabel>
+
+									<p:outputLabel value="Datum: "></p:outputLabel>
+									<p:outputLabel value="#{pregled.obaveza.datum}"></p:outputLabel>
+									<p:outputLabel />
+									<p:commandButton value="Detalji"
+										action="#{editPacijentManagedBean.showPregled(pregled)}"></p:commandButton>
+								</p:panelGrid>
+							</p:carousel>
+						</c:when>
+						<c:otherwise>
+							<p:outputLabel value="U bazi ne postoje pregledi za pacijenta"></p:outputLabel>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+
+</h:body>
+</html>

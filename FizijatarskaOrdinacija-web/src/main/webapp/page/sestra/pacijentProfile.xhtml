@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Medicinska sestra - Unos stanja</title>
+
+	<h:outputStylesheet library="css" name="fizijatar.pacijent.profile.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<H1>Prikaz pacijenta</H1>
+		</div>
+
+		<div id="main">
+			<div id="mainLeft">
+				<h2>Osnovne informacije</h2>
+				<p:panelGrid columns="2" columnClasses="">
+					<p:outputLabel value="Ime: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.ime}"></p:outputLabel>
+					<p:outputLabel value="Prezime: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.prezime}"></p:outputLabel>
+					<p:outputLabel value="Korisnicko ime: "></p:outputLabel>
+					<p:outputLabel disabled="true"
+						value="#{inputStateSestraManagedBean.pacijent.osoba.korisnickoIme}"></p:outputLabel>
+					<p:outputLabel value="email: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.email}"></p:outputLabel>
+					<p:outputLabel value="JMBG: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.jmbg}"></p:outputLabel>
+					<p:outputLabel value="Broj zdravstvene knjizice: "></p:outputLabel>
+					<p:outputLabel required="true"
+						value="#{inputStateSestraManagedBean.pacijent.osoba.pacijent.brojZdravstveneKnjizice}"></p:outputLabel>
+					<p:outputLabel value="Adresa stanovanja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.adresa}"></p:outputLabel>
+					<p:outputLabel value="Mesto stanovanja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.mesto}"></p:outputLabel>
+					<p:outputLabel value="Mesto rodjenja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.mestoRodjenja}"></p:outputLabel>
+					<p:outputLabel value="Datum rodjenja: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.osoba.datumRodjenja}"></p:outputLabel>
+					<p:outputLabel value="Fizioterapeut: "></p:outputLabel>
+					<p:outputLabel
+						value="#{inputStateSestraManagedBean.pacijent.fizioterapeut.radnik.osoba.ime} 
+						#{inputStateSestraManagedBean.pacijent.fizioterapeut.radnik.osoba.prezime}"></p:outputLabel>
+				</p:panelGrid>
+			</div>
+			<div id="mainRight" align="center">
+
+				<h:form id="form">
+					<h2>Karton</h2>
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Napomena:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px" disable="true"
+							value="#{inputStateSestraManagedBean.pacijent.karton.napomena}"></p:inputTextarea>
+						<p:outputLabel value="Sistematski:"></p:outputLabel>
+						<p:inputTextarea style="width: 400px" disable="true"
+							value="#{inputStateSestraManagedBean.pacijent.karton.sistematski}"></p:inputTextarea>
+
+
+					</p:panelGrid>
+					<h2>Stanje pacijenta</h2>
+					<p:growl id="message" showDetail="true" life="5000" />
+					
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Temperatura"></p:outputLabel>
+						<p:inputText value="#{inputStateSestraManagedBean.temp}"></p:inputText>
+						<p:outputLabel value="Pritisak"></p:outputLabel>
+						<p:inputText value="#{inputStateSestraManagedBean.pritisak}"></p:inputText>
+						<p:outputLabel value="Disanje"></p:outputLabel>
+						<p:inputText value="#{inputStateSestraManagedBean.disanje}"></p:inputText>
+
+						<p:commandButton value="Sacuvaj" execute="@form"
+							update="message"
+							action="#{inputStateSestraManagedBean.saveState}"></p:commandButton>
+					</p:panelGrid>
+
+				</h:form>
+			</div>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+</h:body>
+</html>

@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Pacijent - Obaveze</title>
+
+	<h:outputStylesheet library="css" name="pacijent.welcome.css" />
+
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>
+				<p:outputLabel
+					value="#{welcomePacijentManagedBean.osoba.ime} 
+				#{welcomePacijentManagedBean.osoba.prezime}, dobro dosli!"></p:outputLabel>
+			</h1>
+		</div>
+
+		<div id="boxHeader">
+			<h:form>
+				<p:commandButton styleClass="updateProfileButton"
+					value="Azuriraj profil" execute="@form" update="@form" ajax="false"
+					action="#{welcomePacijentManagedBean.showProfile}"></p:commandButton>
+					
+				<p:commandButton styleClass="logOut" value="Odjavi se"
+					action="#{loginManagedBean.logOut}"></p:commandButton>
+			</h:form>
+		</div>
+
+		<div id="boxColor">
+			<p:outputLabel styleClass="labelColor" value="Pregled: " />
+			<div id="boxPregled" />
+			<br />
+			<p:outputLabel styleClass="labelColor" value="Vezbe: " />
+			<div id="boxVezbe" />
+			<br />
+			<p:outputLabel styleClass="labelColor" value="Obaveza fizijatra: " />
+			<div id="boxFizijatar" />
+			<br />
+			<p:outputLabel styleClass="labelColor"
+				value="Obaveza fizioterapeuta: " />
+			<div id="boxFizioterapeut" />
+		</div>
+
+		<div id="main" align="center">
+
+			<div id="boxSchedule">
+				<p:schedule id="schedule" styleClass="schedule"
+					value="#{scheduleViewPacijent.eventModel}" widgetVar="myschedule"
+					timeZone="GMT+2" locale="sr" resizable="false" draggable="false"
+					axisFormat="H(:mm)" timeFormat="H(:mm)" slotMinutes="15">
+
+					<p:ajax event="dateSelect"
+						listener="#{scheduleViewPacijent.onDateSelect}"
+						update="newEventForm:newEventDetails, newEventForm"
+						oncomplete="PF('newEventDialog').show();" />
+
+					<p:ajax event="eventSelect"
+						listener="#{scheduleViewPacijent.onEventSelect}"
+						update="editEventPregledForm, editEventVezbeForm" />
+				</p:schedule>
+
+				<p:dialog id="editEventPregledDialog"
+					widgetVar="editEventPregledDialog" header="Detalji pregleda"
+					showEffect="clip" hideEffect="clip">
+					<h:form id="editEventPregledForm">
+
+						<p:commandButton value="Obrisi" styleClass="deleteButton"
+							actionListener="#{scheduleViewPacijent.deleteEventPregled}"
+							oncomplete="PF('myschedule').update();PF('editEventPregledDialog').hide();" />
+
+						<br />
+
+						<p:outputLabel id="messageEditEventPregled"
+							value="#{scheduleViewPacijent.message}"></p:outputLabel>
+
+						<h:panelGrid id="editEventPregledDetails" columns="2">
+							<p:outputLabel value="Naziv:" />
+							<p:inputText
+								value="#{scheduleViewPacijent.choosedPregled.obaveza.naziv}"
+								required="true" />
+
+							<p:outputLabel value="Opis:" />
+							<p:inputTextarea
+								value="#{scheduleViewPacijent.choosedPregled.obaveza.opis}" />
+
+							<p:outputLabel value="Datum:" />
+							<p:calendar locale="sr" required="true" pattern="yyyy-MMM-dd"
+								value="#{scheduleViewPacijent.choosedPregled.obaveza.datum}"></p:calendar>
+
+							<p:outputLabel id="messageOd1" />
+							<p:outputLabel />
+							<p:outputLabel value="Vreme:" />
+							<p:inputText placeholder="hh:mm" required="true"
+								value="#{scheduleViewPacijent.choosedPregled.obaveza.vremeOd}">
+								<f:validator for="messageOd1" validatorId="timeValidator"></f:validator>
+							</p:inputText>
+						</h:panelGrid>
+						<br />
+						<p:commandButton value="Sacuvaj" styleClass="saveButton"
+							update="@form" process="@form"
+							actionListener="#{scheduleViewPacijent.editEventPregled}" />
+					</h:form>
+				</p:dialog>
+
+				<p:dialog id="editEventVezbeDialog" widgetVar="editEventVezbeDialog"
+					header="Detalji vezbi" showEffect="clip" hideEffect="clip">
+					<h:form id="editEventVezbeForm">
+
+						<p:outputLabel id="messagEeditEventVezbe"
+							value="#{scheduleViewPacijent.message}"></p:outputLabel>
+
+						<h:panelGrid id="editEventPregledDetails" columns="2">
+							<p:outputLabel value="Naziv:" />
+							<p:inputText disabled="true"
+								value="#{scheduleViewPacijent.choosedVezbe.obaveza.naziv}"
+								required="true" />
+
+							<p:outputLabel value="Opis:" />
+							<p:inputTextarea disabled="true"
+								value="#{scheduleViewPacijent.choosedVezbe.obaveza.opis}" />
+
+							<p:outputLabel value="Datum:" />
+							<p:calendar locale="sr" required="true" pattern="yyyy-MMM-dd"
+								value="#{scheduleViewPacijent.choosedVezbe.obaveza.datum}"></p:calendar>
+
+							<p:outputLabel id="messageOd1" />
+							<p:outputLabel />
+							<p:outputLabel value="Vreme:" />
+							<p:inputText placeholder="hh:mm" required="true"
+								value="#{scheduleViewPacijent.choosedVezbe.obaveza.vremeOd}">
+								<f:validator for="messageOd1" validatorId="timeValidator"></f:validator>
+							</p:inputText>
+						</h:panelGrid>
+						<br />
+						<p:commandButton value="Sacuvaj" styleClass="saveButton"
+							update="@form" process="@form"
+							actionListener="#{scheduleViewPacijent.editEventVezbe}" />
+					</h:form>
+				</p:dialog>
+
+				<p:dialog id="newEventDialog" widgetVar="newEventDialog"
+					header="Zakazi pregled" showEffect="clip" hideEffect="clip">
+					<h:form id="newEventForm">
+						<p:outputLabel id="messageNewEvent"
+							value="#{scheduleViewPacijent.message}"></p:outputLabel>
+
+						<h:panelGrid id="newEventDetails" columns="2">
+							<p:outputLabel value="Naziv: " />
+							<p:inputText required="true"
+								value="#{scheduleViewPacijent.newObaveza.naziv}" />
+
+							<p:outputLabel value="Opis:" />
+							<p:inputTextarea value="#{scheduleViewPacijent.newObaveza.opis}" />
+
+							<p:outputLabel value="Datum:" />
+							<p:calendar locale="sr" required="true" pattern="yyyy-MMM-dd"
+								value="#{scheduleViewPacijent.newObaveza.datum}"></p:calendar>
+
+							<p:outputLabel id="messageOd2" />
+							<p:outputLabel />
+							<p:outputLabel value="Vreme:" />
+							<p:inputText required="true" placeholder="hh:mm"
+								value="#{scheduleViewPacijent.newObaveza.vremeOd}">
+								<f:validator for="messageOd2" validatorId="timeValidator"></f:validator>
+							</p:inputText>
+							<br />
+							<p:commandButton value="Sacuvaj" styleClass="saveButton"
+								update="@form" process="@form"
+								actionListener="#{scheduleViewPacijent.addEvent}" />
+						</h:panelGrid>
+					</h:form>
+				</p:dialog>
+
+			</div>
+		</div>
+
+		<div id="footer"></div>
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

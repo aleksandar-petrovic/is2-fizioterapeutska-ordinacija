@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Pregled ne postoji</title>
+
+	<h:outputStylesheet library="css"
+		name="fizijatar.scheduled.pregled.dont.exist.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>Zakazivanje vezbi za
+				#{scheduleViewFizioterapeutPacijent.pacijent.osoba.ime}
+				#{scheduleViewFizioterapeutPacijent.pacijent.osoba.prezime}</h1>
+		</div>
+
+		<h:form>
+			<p:commandButton id="backButton" value="Nazad"
+				action="pacijentProfile.xhtml"></p:commandButton>
+		</h:form>
+
+		<div id="main">
+			<h2>Niste obavili pregled, obratite se fizijatru</h2>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

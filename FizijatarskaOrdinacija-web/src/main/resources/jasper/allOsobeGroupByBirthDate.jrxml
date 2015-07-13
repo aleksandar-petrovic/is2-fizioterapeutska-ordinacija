@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.4.final using JasperReports Library version 6.0.4  -->
+<!-- 2015-06-08T16:10:04 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="allOsobeGroupByBirthDate" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8f536c39-dc0b-42f4-afab-f8161359b1f8">
+	<parameter name="datumKreiranja" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ime" class="java.lang.String"/>
+	<field name="prezime" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="datumRodjenja" class="java.util.Date"/>
+	<variable name="ImeIPrezime" class="java.lang.String">
+		<variableExpression><![CDATA[$F{ime}+ " " + $F{prezime}]]></variableExpression>
+	</variable>
+	<variable name="Rodjeni datuma " class="java.lang.String">
+		<variableExpression><![CDATA["Rodjeni datuma " + $F{datumRodjenja}]]></variableExpression>
+	</variable>
+	<group name="groupOsobaOrderByBirthDate">
+		<groupExpression><![CDATA[$F{datumRodjenja}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="227" y="0" width="100" height="30" uuid="dcbf29a3-4ae2-4225-876c-3776e464d1ac"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{Rodjeni datuma }]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="174" y="0" width="206" height="30" uuid="e94c9e9d-bedf-4c9b-9e25-1c99b30972ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Sve osobe u ordinaciji]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="60" width="40" height="20" uuid="edc3114a-b4a0-4f56-922c-1352818165c9">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Na dan:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="60" width="100" height="20" uuid="90f28dae-9296-4a59-9ad3-d874ee8719d6"/>
+				<textFieldExpression><![CDATA[$P{datumKreiranja}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="50" height="23" backcolor="#85C4FF" uuid="9d88a90f-fa55-4409-b127-7c22e6a874f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="0" width="40" height="23" backcolor="#85C4FF" uuid="f3337be5-0181-4faf-9686-45472e878fa3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Rd.br.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="110" y="0" width="170" height="23" backcolor="#85C4FF" uuid="fc43e449-371e-4944-93c2-002ead0488c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Ime i prezime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="140" height="23" backcolor="#85C4FF" uuid="2e02b40b-cf9e-4165-bd1a-cf68a006c6bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="420" y="0" width="110" height="23" backcolor="#85C4FF" uuid="32858a1b-ac5a-47e2-baf7-a163ab31a2e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Datum rodjenja]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="0" width="40" height="20" uuid="e18cbf2f-7cf9-4404-af00-5d69b7fc33ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="50" height="20" uuid="b34ed6d7-a982-4a4f-b433-d542d1c40a72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="170" height="20" uuid="806c0b54-e8fa-4d8f-98b5-146552b11211"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ImeIPrezime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="140" height="20" uuid="5e120792-9e90-4b9c-98bb-5cde3318896b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="110" height="20" uuid="ce975133-2908-4b9f-a6aa-a3e21f75529c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{datumRodjenja}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

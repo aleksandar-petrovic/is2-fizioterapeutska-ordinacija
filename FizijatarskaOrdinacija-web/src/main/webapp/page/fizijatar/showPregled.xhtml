@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Izabrani pregled</title>
+
+	<h:outputStylesheet library="css" name="fizijatar.show.pregled.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+			<h1>Prikaz pregleda</h1>
+		</div>
+
+		<div id="main">
+			<div id="boxLeft">
+				<div id="pacijentInfo">
+					<h2>Pacijent</h2>
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Ime i prezime:" />
+						<p:outputLabel
+							value="#{showPregledManagedBean.pacijent.osoba.ime} 
+						#{showPregledManagedBean.pacijent.osoba.prezime}" />
+
+						<p:outputLabel value="Broj zdravstvene knjizice:" />
+						<p:outputLabel
+							value="#{showPregledManagedBean.pacijent.brojZdravstveneKnjizice}" />
+
+						<p:outputLabel value="JMBG:" />
+						<p:outputLabel
+							value="#{showPregledManagedBean.pacijent.osoba.jmbg}" />
+
+						<p:outputLabel value="email:" />
+						<p:outputLabel
+							value="#{showPregledManagedBean.pacijent.osoba.email}" />
+					</p:panelGrid>
+				</div>
+
+				<div id="pacijentKarton">
+					<h3>Karton</h3>
+					<h:form>
+						<p:growl id="msgKarton" showDetail="true" life="5000" />
+								
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Alergije:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pacijent.karton.alergija}"></p:inputTextarea>
+							<p:outputLabel value="Bolesti:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pacijent.karton.bolesti}"></p:inputTextarea>
+							<p:outputLabel value="Sistematski:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pacijent.karton.sistematski}"></p:inputTextarea>
+							<p:outputLabel value="Napomena:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pacijent.karton.napomena}"></p:inputTextarea>
+
+							<p:outputLabel></p:outputLabel>
+							<p:commandButton value="Sacuvaj" execute="@form" update="msgKarton"
+								action="#{showPregledManagedBean.updatePacijentKarton}"></p:commandButton>
+						</p:panelGrid>
+
+					</h:form>
+				</div>
+			</div>
+
+			<div id="boxRight" align="center">
+				<div>
+					<p:outputLabel value="Pregled obavio fizijatar: "></p:outputLabel>
+					<p:outputLabel
+						value="#{showPregledManagedBean.obaveza.fizijatar.radnik.osoba.ime}
+									#{showPregledManagedBean.obaveza.fizijatar.radnik.osoba.prezime}"></p:outputLabel>
+
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Naziv:"></p:outputLabel>
+						<p:outputLabel value="#{showPregledManagedBean.obaveza.naziv}"></p:outputLabel>
+
+						<p:outputLabel value="Opis:"></p:outputLabel>
+						<p:outputLabel value="#{showPregledManagedBean.obaveza.opis}"></p:outputLabel>
+
+						<p:outputLabel value="Datum:"></p:outputLabel>
+						<p:outputLabel value="#{showPregledManagedBean.obaveza.datum}"></p:outputLabel>
+
+						<p:outputLabel value="Vreme:"></p:outputLabel>
+						<p:outputLabel
+							value="#{showPregledManagedBean.obaveza.vremeOd} -
+							#{showPregledManagedBean.obaveza.vremeDo}"></p:outputLabel>
+					</p:panelGrid>
+				</div>
+
+				<h:form>
+					<p:growl id="msgPregled" showDetail="true" life="5000" />
+					
+					<div id="stanje">
+						<h3>Stanje</h3>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Opis:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pregled.stanje.opisStanja}"></p:inputTextarea>
+							<p:outputLabel value="Datum:"></p:outputLabel>
+							<p:calendar locale="sr" pattern="yyyy-MMM-dd"
+								value="#{showPregledManagedBean.pregled.stanje.datum}"></p:calendar>
+						</p:panelGrid>
+					</div>
+
+					<div id="dijagnoza">
+						<h3>Dijagnoza</h3>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Opis:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pregled.dijagnoza.opis}"></p:inputTextarea>
+							<p:outputLabel></p:outputLabel>
+						</p:panelGrid>
+					</div>
+
+					<div id="terapija">
+						<h3>Terapija</h3>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Opis:"></p:outputLabel>
+							<p:inputTextarea style="width: 400px"
+								value="#{showPregledManagedBean.pregled.terapija.opis}"></p:inputTextarea>
+						</p:panelGrid>
+					</div>
+
+					<div id="napomena">
+						<p:inputTextarea style="width: 400px" placeholder="Napomena"
+							value="#{showPregledManagedBean.pregled.napomena}"></p:inputTextarea>
+					</div>
+					
+					<p:commandButton value="Sacuvaj" execute="@form" update="msgPregled"
+						action="#{showPregledManagedBean.updatePregled}"></p:commandButton>
+				</h:form>
+			</div>
+
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+	<script src="../../resources/js/calendar.js"></script>
+
+</h:body>
+</html>

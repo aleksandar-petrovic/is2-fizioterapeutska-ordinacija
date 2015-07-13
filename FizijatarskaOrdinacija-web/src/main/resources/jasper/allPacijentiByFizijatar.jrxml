@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.4.final using JasperReports Library version 6.0.4  -->
+<!-- 2015-06-25T20:46:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="allPacijentiByFizijatar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0092284a-35bd-4a2d-aacf-d4ae347e8e0b">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ime" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prezime" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jmbg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mesto" class="java.lang.String"/>
+	<field name="adresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="imeFizijatar" class="java.lang.String"/>
+	<field name="prezimeFizijatar" class="java.lang.String"/>
+	<field name="idFizijatar" class="java.lang.Integer"/>
+	<variable name="mesto-adresa" class="java.lang.String">
+		<variableExpression><![CDATA[$F{adresa} + ", " + $F{mesto}]]></variableExpression>
+	</variable>
+	<variable name="fizijatarImePrezime" class="java.lang.String">
+		<variableExpression><![CDATA[$F{prezimeFizijatar}+ " " + $F{imeFizijatar}]]></variableExpression>
+	</variable>
+	<group name="grupa">
+		<groupExpression><![CDATA[$F{idFizijatar}]]></groupExpression>
+		<groupHeader>
+			<band height="54">
+				<textField>
+					<reportElement mode="Opaque" x="180" y="12" width="180" height="30" backcolor="#70FFAC" uuid="471f7188-f2a7-41b1-8283-243023b48605"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{fizijatarImePrezime}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="20" width="334" height="41" uuid="a1560565-dd1e-454e-8765-41a9b95d6cef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Za svakog fizijatra njegovi pacijenti]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="23" width="120" height="30" forecolor="#000000" backcolor="#AC9CFF" uuid="3839fa17-a56a-4a55-a6a1-9bea5f2bb816"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="140" y="23" width="110" height="30" forecolor="#000000" backcolor="#AC9CFF" uuid="b2cc2bd6-52c2-40c4-b680-309a470d5f09"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[prezime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="250" y="23" width="120" height="30" forecolor="#000000" backcolor="#AC9CFF" uuid="be5d7475-1cef-4c0d-a4e2-c721eb1a9c52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[jmbg]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="370" y="23" width="160" height="30" forecolor="#000000" backcolor="#AC9CFF" uuid="977cbcfd-b530-4c6e-8c9c-cde4a7e471af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Adresa"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="140" y="0" width="110" height="30" uuid="89de6379-5d1b-494c-95da-42e84cfa81d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prezime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="160" height="30" uuid="7412d43d-c714-41d3-a42e-b832e523fd3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{mesto-adresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="0" width="120" height="30" uuid="9ee32741-687f-477d-bdd6-42ae5e9e0f91"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="120" height="30" uuid="4968c2be-69a7-4f9d-8c12-0a51da56c34d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jmbg}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

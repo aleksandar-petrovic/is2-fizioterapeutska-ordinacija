@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Medicinska sestra</title>
+
+	<h:outputStylesheet library="css" name="sestra.welcome.css" />
+
+</h:head>
+<h:body>
+	<f:view>
+
+		<div id="header">
+
+			<h1>#{welcomeSestraManagedBean.sestra.ime}
+				#{welcomeSestraManagedBean.sestra.prezime}, dobro dosli!</h1>
+		</div>
+
+		<div id="meni">
+			<h:form>
+				<p:commandButton styleClass="updateProfileButton"
+					value="Azuriraj profil" execute="@form" update="@form" ajax="false"
+					action="#{welcomeSestraManagedBean.showMyProfile}"></p:commandButton>
+					
+				<p:commandButton value="Administrator" style="margin-left: 10px"
+					rendered="#{welcomeSestraManagedBean.sestra.radnik.admin}"
+					action="#{welcomeSestraManagedBean.adminPage}"></p:commandButton>
+					
+				<p:commandButton styleClass="logOut" value="Odjavi se"
+					action="#{loginManagedBean.logOut}"></p:commandButton>
+			</h:form>
+		</div>
+
+
+		<div id="main">
+			<h:form>
+				<p:growl id="message" showDetail="true" life="5000" />
+				
+				<p:panelGrid columns="1">
+					<p:inputText required="true" styleClass="inputTextSearch"
+						placeholder="Unesite jmbg ili korisnicko ime pacijenta"
+						style="width: 350px;"
+						value="#{welcomeSestraManagedBean.pacijentString}">
+					</p:inputText>
+					<p:commandButton value="Prikazi pacijenta" execute="@form"
+						update="@form"
+						action="#{welcomeSestraManagedBean.showPacijent}">
+					</p:commandButton>
+				</p:panelGrid>
+			</h:form>
+		</div>
+
+		<div id="footer"></div>
+
+	</f:view>
+
+</h:body>
+</html>
